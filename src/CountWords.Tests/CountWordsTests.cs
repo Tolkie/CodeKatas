@@ -1,44 +1,30 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using Xunit;
 
-namespace CountWords.Tests
+namespace CountWords.Tests;
+
+public class CountWordsTests
 {
-    [TestClass]
-    public class CountWordsTests
+    private readonly CountWords countWords = new();
+    
+    [Fact]
+    public void CountWords_returns_0_for_empty_string()
     {
-        private CountWords countWords;
+        var result = countWords.Count(string.Empty);
+        result.Should().Be(0);
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            countWords = new CountWords();
-        }
+    [Fact]
+    public void CountWords_returns_2_for_HelloWorld()
+    {
+        var result = countWords.Count("Hello, World!");
+        result.Should().Be(2);
+    }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            countWords = null;
-        } 
-
-        [TestMethod]
-        public void CountWords_returns_0_for_empty_string()
-        {
-            int result = countWords.Count(String.Empty);
-            Assert.AreEqual(0, result);
-        }
-
-        [TestMethod]
-        public void CountWords_returns_2_for_HelloWorld()
-        {
-            int result = countWords.Count("Hello, World!");
-            Assert.AreEqual(2, result);
-        }
-
-        [TestMethod]
-        public void CountWords_returns_4_for_comma_seperated_list_with_no_spaces()
-        {
-            int result = countWords.Count("Billy,Bob,Joe,Jim");
-            Assert.AreEqual(4, result);
-        }
+    [Fact]
+    public void CountWords_returns_4_for_comma_seperated_list_with_no_spaces()
+    {
+        var result = countWords.Count("Billy,Bob,Joe,Jim");
+        result.Should().Be(4);
     }
 }

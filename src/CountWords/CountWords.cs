@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CountWords
+﻿namespace CountWords
 {
     public class CountWords
     {

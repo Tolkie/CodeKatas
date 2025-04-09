@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LookAndSay
+﻿namespace LookAndSay
 {
     public class LookAndSay
     {

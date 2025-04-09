@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PalindromeChecker
+﻿namespace PalindromeChecker
 {
     public class PalindromeChecker
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CaesarCipher
+﻿namespace CaesarCipher
 {
     public class CaesarCipher
     {

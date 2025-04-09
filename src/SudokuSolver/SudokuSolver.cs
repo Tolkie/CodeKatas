@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SudokuSolver
+﻿namespace SudokuSolver
 {
     public class SudokuSolver
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChangeReturn
+﻿namespace ChangeReturn
 {
     public class ChangeReturn
     {

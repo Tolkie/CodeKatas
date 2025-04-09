@@ -1,66 +1,51 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace PalindromeChecker.Tests
+namespace PalindromeChecker.Tests;
+
+public class PalindromeCheckerTests
 {
-    [TestClass]
-    public class PalindromeCheckerTests
+    private readonly PalindromeChecker palindromeChecker = new();
+
+    [Fact]
+    public void PalindromeChecker_returns_true_for_empty_string()
     {
-        private PalindromeChecker palindromeChecker;
+        var result = palindromeChecker.IsPalindrome(string.Empty);
+        result.Should().BeTrue();
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            palindromeChecker = new PalindromeChecker();
-        }
+    [Fact]
+    public void PalindromeChecker_returns_true_for_null()
+    {
+        var result = palindromeChecker.IsPalindrome(null!);
+        result.Should().BeTrue();
+    }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            palindromeChecker = null;
-        }  
+    [Fact]
+    public void PalindromeChecker_returns_true_for_input_ABBA()
+    {
+        var result = palindromeChecker.IsPalindrome("ABBA");
+        result.Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void PalindromeChecker_returns_true_for_empty_string()
-        {
-            var result = palindromeChecker.IsPalindrome(String.Empty);
-            Assert.AreEqual(true, result);
-        }
+    [Fact]
+    public void PalindromeChecker_returns_true_for_input_tattarrattat()
+    {
+        var result = palindromeChecker.IsPalindrome("tattarrattat");
+        result.Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void PalindromeChecker_returns_true_for_null()
-        {
-            var result = palindromeChecker.IsPalindrome(null);
-            Assert.AreEqual(true, result);
-        }
+    [Fact]
+    public void PalindromeChecker_returns_false_for_input_ABCD()
+    {
+        var result = palindromeChecker.IsPalindrome("ABCD");
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void PalindromeChecker_returns_true_for_input_ABBA()
-        {
-            var result = palindromeChecker.IsPalindrome("ABBA");
-            Assert.AreEqual(true, result);
-        }
-
-        [TestMethod]
-        public void PalindromeChecker_returns_true_for_input_tattarrattat()
-        {
-            var result = palindromeChecker.IsPalindrome("tattarrattat");
-            Assert.AreEqual(true, result);
-        }
-
-        [TestMethod]
-        public void PalindromeChecker_returns_false_for_input_ABCD()
-        {
-            var result = palindromeChecker.IsPalindrome("ABCD");
-            Assert.AreEqual(false, result);
-        }
-
-        [TestMethod]
-        public void PalindromeChecker_returns_false_for_input_palindrome()
-        {
-            var result = palindromeChecker.IsPalindrome("palindrome");
-            Assert.AreEqual(false, result);
-        } 
+    [Fact]
+    public void PalindromeChecker_returns_false_for_input_palindrome()
+    {
+        var result = palindromeChecker.IsPalindrome("palindrome");
+        result.Should().BeFalse();
     }
 }

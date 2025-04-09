@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PrimeNumbers
+﻿namespace PrimeNumbers
 {
     public class PrimeNumbers
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RomanNumerals
+﻿namespace RomanNumerals
 {
     public class RomanNumerals
     {

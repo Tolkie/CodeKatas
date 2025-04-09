@@ -1,60 +1,44 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace PigLatin.Tests
+namespace PigLatin.Tests;
+
+public class PigLatinTestsPart1
 {
-    [TestClass]
-    public class PigLatinTestsPart1
+    private readonly PigLatin pigLatin = new();
+
+    [Fact]
+    public void PigLatin_returns_ellohay_for_input_hello()
     {
-        private PigLatin pigLatin;
+        var result = pigLatin.EnglishToPigLatin("hello");
+        result.Should().Be("ellohay");
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            pigLatin = new PigLatin();
-        }
+    [Fact]
+    public void PigLatin_returns_iway_for_input_i()
+    {
+        var result = pigLatin.EnglishToPigLatin("i");
+        result.Should().Be("iway");
+    }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            pigLatin = null;
-        }
+    [Fact]
+    public void PigLatin_returns_oveglay_for_input_glove()
+    {
+        var result = pigLatin.EnglishToPigLatin("glove");
+        result.Should().Be("oveglay");
+    }
 
-        [TestMethod]
-        public void PigLatin_returns_ellohay_for_input_hello()
-        {
-            string result = pigLatin.EnglishToPigLatin("hello");
-            Assert.AreEqual("ellohay", result);
-        }
+    [Fact]
+    public void PigLatin_returns_EthayIckquayOwnbrayOxfayOverwayEthayAzylayOgday_for_input_TheQuickBrownFoxJumpsOverTheLazyDog()
+    {
+        var result = pigLatin.EnglishToPigLatin("The quick, brown fox jumps over the lazy dog.");
+        result.Should().Be("Ethay ickquay, ownbray oxfay umpsjay overway ethay azylay ogday.");
+    }
 
-        [TestMethod]
-        public void PigLatin_returns_iway_for_input_i()
-        {
-            string result = pigLatin.EnglishToPigLatin("i");
-            Assert.AreEqual("iway", result);
-        }
-
-        [TestMethod]
-        public void PigLatin_returns_oveglay_for_input_glove()
-        {
-            string result = pigLatin.EnglishToPigLatin("glove");
-            Assert.AreEqual("oveglay", result);
-        }
-
-        /* Uncomment here for Extra Credit
-        
-       [TestMethod]
-       public void PigLatin_returns_EthayIckquayOwnbrayOxfayOverwayEthayAzylayOgday_for_input_TheQuickBrownFoxJumpsOverTheLazyDog()
-       {
-           var result = pigLatin.EnglishToPigLatin("The quick, brown fox jumps over the lazy dog.");
-           Assert.AreEqual("Ethay ickquay, ownbray oxfay umpsjay overway ethay azylay ogday.", result);
-       }
-        
-       [TestMethod]
-       public void PigLatin_returns_OdecayAtaskaArewayAwayOodgayAywayOtayOnehayOuryayIllsskay_for_input_ CodeKatasAreAGoodWayToHoneYourSkills()
-       {
-           var result = pigLatin.EnglishToPigLatin("Code Katas are a good way to hone your skills.");
-           Assert.AreEqual("Odecay Ataskay areway away oodgay ayway otay onehay ouryay illsskay.",result);
-       }
-       */
+    [Fact]
+    public void PigLatin_returns_OdecayAtaskaArewayAwayOodgayAywayOtayOnehayOuryayIllsskay_for_input_CodeKatasAreAGoodWayToHoneYourSkills()
+    {
+        var result = pigLatin.EnglishToPigLatin("Code Katas are a good way to hone your skills.");
+        result.Should().Be("Odecay Ataskay areway away oodgay ayway otay onehay ouryay illsskay.");
     }
 }

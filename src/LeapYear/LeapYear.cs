@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LeapYear
+﻿namespace LeapYear
 {
     public class LeapYear
     {

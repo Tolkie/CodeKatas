@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IncomeTax
+﻿namespace IncomeTax
 {
     public class IncomeTax
     {

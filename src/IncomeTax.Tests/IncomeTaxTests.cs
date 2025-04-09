@@ -1,57 +1,44 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace IncomeTax.Tests
+namespace IncomeTax.Tests;
+
+public class IncomeTaxTests
 {
-    [TestClass]
-    public class IncomeTaxTests
+    private readonly IncomeTax incomeTax = new();
+
+    [Fact]
+    public void No_Income_Returns_0()
     {
-        private IncomeTax _incomeTax;
+        var result = incomeTax.CalculateTax(0);
+        result.Should().Be(0);
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            _incomeTax = new IncomeTax();
-        }
+    [Fact]
+    public void Negative_Income_Returns_0()
+    {
+        var result = incomeTax.CalculateTax(-1);
+        result.Should().Be(0);
+    }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            _incomeTax = null;
-        }
+    [Fact]
+    public void Income_Of_10000_Returns_1085()
+    {
+        var result = incomeTax.CalculateTax(10000);
+        result.Should().Be(1085);
+    }
 
-        [TestMethod]
-        public void No_Income_Returns_0()
-        {
-            int result = _incomeTax.CalculateTax(0);
-            Assert.AreEqual(0, result);
-        }
+    [Fact]
+    public void Income_Of_20000_Returns_2554()
+    {
+        var result = incomeTax.CalculateTax(20000);
+        result.Should().Be(2554);
+    }
 
-        [TestMethod]
-        public void Negative_Income_Returns_0()
-        {
-            int result = _incomeTax.CalculateTax(-1);
-            Assert.AreEqual(result, 0);
-        }
-
-        [TestMethod]
-        public void Income_Of_10000_Returns_1085()
-        {
-            int result = _incomeTax.CalculateTax(10000);
-            Assert.AreEqual(1085, result);
-        }
-
-        [TestMethod]
-        public void Income_Of_20000_Returns_2554()
-        {
-            int result = _incomeTax.CalculateTax(20000);
-            Assert.AreEqual(2554, result);
-        }
-
-        [TestMethod]
-        public void Income_Of_450000_Returns_135964()
-        {
-            int result = _incomeTax.CalculateTax(450000);
-            Assert.AreEqual(135964, result);
-        }
+    [Fact]
+    public void Income_Of_450000_Returns_135964()
+    {
+        var result = incomeTax.CalculateTax(450000);
+        result.Should().Be(135964);
     }
 }

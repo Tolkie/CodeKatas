@@ -1,151 +1,135 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace LeapYear.Tests
+namespace LeapYear.Tests;
+
+public class LeapYearTests
 {
-    [TestClass]
-    public class LeapYearTests
+    private readonly LeapYear leapYear = new();
+
+    [Fact]
+    public void LeapYear_returns_true_for_1904()
     {
-        private LeapYear leapYear;
+        var result = leapYear.IsLeapYear(1904);
+        result.Should().BeTrue();
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            leapYear = new LeapYear();
-        }
+    [Fact]
+    public void LeapYear_returns_true_for_1952()
+    {
+        var result = leapYear.IsLeapYear(1952);
+        result.Should().BeTrue();
+    }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            leapYear = null;
-        }
+    [Fact]
+    public void LeapYear_returns_true_for_2000()
+    {
+        var result = leapYear.IsLeapYear(2000);
+        result.Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_true_for_1904()
-        {
-            bool result = leapYear.IsLeapYear(1904);
-            Assert.IsTrue(result);
-        }
+    [Fact]
+    public void LeapYear_returns_true_for_2012()
+    {
+        var result = leapYear.IsLeapYear(2012);
+        result.Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_true_for_1952()
-        {
-            bool result = leapYear.IsLeapYear(1952);
-            Assert.IsTrue(result);
-        }
+    [Fact]
+    public void LeapYear_returns_true_for_2048()
+    {
+        var result = leapYear.IsLeapYear(2048);
+        result.Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_true_for_2000()
-        {
-            bool result = leapYear.IsLeapYear(2000);
-            Assert.IsTrue(result);
-        }
+    [Fact]
+    public void LeapYear_returns_true_for_2096()
+    {
+        var result = leapYear.IsLeapYear(2096);
+        result.Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_true_for_2012()
-        {
-            bool result = leapYear.IsLeapYear(2012);
-            Assert.IsTrue(result);
-        }
+    [Fact]
+    public void LeapYear_returns_false_for_1700()
+    {
+        var result = leapYear.IsLeapYear(1700);
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_true_for_2048()
-        {
-            bool result = leapYear.IsLeapYear(2048);
-            Assert.IsTrue(result);
-        }
+    [Fact]
+    public void LeapYear_returns_false_for_1900()
+    {
+        var result = leapYear.IsLeapYear(1900);
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_true_for_2096()
-        {
-            bool result = leapYear.IsLeapYear(2096);
-            Assert.IsTrue(result);
-        }
+    [Fact]
+    public void LeapYear_returns_false_for_2100()
+    {
+        var result = leapYear.IsLeapYear(2100);
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_false_for_1700()
-        {
-            bool result = leapYear.IsLeapYear(1700);
-            Assert.IsFalse(result);
-        }
+    [Fact]
+    public void LeapYear_returns_false_for_2001()
+    {
+        var result = leapYear.IsLeapYear(2001);
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_false_for_1900()
-        {
-            bool result = leapYear.IsLeapYear(1900);
-            Assert.IsFalse(result);
-        }
+    [Fact]
+    public void LeapYear_returns_false_for_2014()
+    {
+        var result = leapYear.IsLeapYear(2014);
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_false_for_2100()
-        {
-            bool result = leapYear.IsLeapYear(2100);
-            Assert.IsFalse(result);
-        }
+    [Fact]
+    public void LeapYear_returns_false_for_2050()
+    {
+        var result = leapYear.IsLeapYear(2050);
+        result.Should().BeFalse();
+    }
+    
+    [Fact]
+    public void LeapYear_returns_false_for_4AD()
+    {
+        var result = leapYear.IsLeapYear(4);
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_false_for_2001()
-        {
-            bool result = leapYear.IsLeapYear(2001);
-            Assert.IsFalse(result);
-        }
+    [Fact]
+    public void LeapYear_returns_false_for_0AD()
+    {
+        var result = leapYear.IsLeapYear(0);
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_false_for_2014()
-        {
-            bool result = leapYear.IsLeapYear(2014);
-            Assert.IsFalse(result);
-        }
+    [Fact]
+    public void LeapYear_returns_false_for_50BC()
+    {
+        var result = leapYear.IsLeapYear(-50);
+        result.Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_false_for_2050()
-        {
-            bool result = leapYear.IsLeapYear(2050);
-            Assert.IsFalse(result);
-        }
+    [Fact]
+    public void LeapYear_returns_true_for_8AD()
+    {
+        var result = leapYear.IsLeapYear(8);
+        result.Should().BeTrue();
+    }
 
-        /*
-        //UNCOMMENT THIS SECTION FOR EXTRA CREDIT
-        [TestMethod]
-        public void LeapYear_returns_false_for_4AD()
-        {
-            bool result = leapYear.IsLeapYear(4);
-            Assert.IsFalse(result);
-        }
-        
-        [TestMethod]
-        public void LeapYear_returns_false_for_0AD()
-        {
-            bool result = leapYear.IsLeapYear(0);
-            Assert.IsFalse(result);
-        }
+    [Fact]
+    public void LeapYear_returns_true_for_30BC()
+    {
+        var result = leapYear.IsLeapYear(-30);
+        result.Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void LeapYear_returns_false_for_50BC()
-        {
-            bool result = leapYear.IsLeapYear(-50);
-            Assert.IsFalse(result);
-        }
-
-        [TestMethod]
-        public void LeapYear_returns_true_for_8AD()
-        {
-            bool result = leapYear.IsLeapYear(8);
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void LeapYear_returns_true_for_30BC()
-        {
-            bool result = leapYear.IsLeapYear(-30);
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void LeapYear_returns_true_for_45BC()
-        {
-            bool result = leapYear.IsLeapYear(-45);
-            Assert.IsTrue(result);
-        }        
-         */
+    [Fact]
+    public void LeapYear_returns_true_for_45BC()
+    {
+        var result = leapYear.IsLeapYear(-45);
+        result.Should().BeTrue();
     }
 }

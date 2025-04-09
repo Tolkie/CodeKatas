@@ -1,30 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace MortgageCalculator.Tests
+namespace MortgageCalculator.Tests;
+
+public class MortgageCalculatorTestsPart2
 {
-    [TestClass]
-    public class MortgageCalculatorTestsPart2
+    private readonly MortgageCalculator mortgageCalculator = new();
+
+    [Fact]
+    public void MortgageCalculator_CalculateMonthlyPayment_1()
     {
-        private MortgageCalculator mortgageCalculator;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            mortgageCalculator = new MortgageCalculator();
-        }
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            mortgageCalculator = null;
-        }
-        
-        [TestMethod]
-        public void MortgageCalculator_CalculateMonthlyPayment_1()
-        {
-            var result = mortgageCalculator.CalculateMonthlyPayment(1, 0, 12, 0);
-            Assert.AreEqual(1, result);
-        }
+        var result = mortgageCalculator.CalculateMonthlyPayment(1, 0, 12, 0);
+        result.Should().Be(1);
     }
 }

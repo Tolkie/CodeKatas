@@ -1,45 +1,31 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace ReverseString.Tests
+namespace ReverseString.Tests;
+
+public class ReverseStringTests
 {
-    [TestClass]
-    public class ReverseStringTests
+    private readonly ReverseString reverseString = new();
+
+    [Fact]
+    public void ReverseString_HelloWorld()
     {
-        private ReverseString reverseString;
+        var result = reverseString.Reverse("Hello, World!");
+        result.Should().Be("!dlroW ,olleH");
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            reverseString = new ReverseString();
-        }
+    [Fact]
+    public void ReverseString_called_twice_returns_original_value()
+    {
+        const string expected = "Hello, World!";
+        var result = reverseString.Reverse(reverseString.Reverse(expected));
+        result.Should().Be(expected);
+    }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            reverseString = null;
-        }
-        
-        [TestMethod]
-        public void ReverseString_HelloWorld()
-        {
-            string result = reverseString.Reverse("Hello, World!");
-            Assert.AreEqual("!dlroW ,olleH", result);
-        }
-
-        [TestMethod]
-        public void ReverseString_called_twice_returns_original_value()
-        {
-            const string expected = "Hello, World!";
-            string result = reverseString.Reverse(reverseString.Reverse(expected));
-            Assert.AreEqual(expected, result);
-        }
-
-        [TestMethod]
-        public void ReverseString_returns_empty_string_for_input_of_empty_string()
-        {
-            string result = reverseString.Reverse(String.Empty);
-            Assert.AreEqual(String.Empty, result);
-        }
+    [Fact]
+    public void ReverseString_returns_empty_string_for_input_of_empty_string()
+    {
+        var result = reverseString.Reverse(string.Empty);
+        result.Should().Be(string.Empty);
     }
 }

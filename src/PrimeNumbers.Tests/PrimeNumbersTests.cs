@@ -1,30 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace PrimeNumbers.Tests
+namespace PrimeNumbers.Tests;
+
+public class PrimeNumbersTests
 {
-    [TestClass]
-    public class PrimeNumbersTests
+    private readonly PrimeNumbers primeNumbers = new();
+
+    [Fact]
+    public void TestMethod1()
     {
-        private PrimeNumbers primeNumbers;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            primeNumbers = new PrimeNumbers();
-        }
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            primeNumbers = null;
-        }
-        
-        [TestMethod]
-        public void TestMethod1()
-        {
-            var result = primeNumbers.GetNextPrimeNumber(1);
-            Assert.AreEqual(0, result);
-        }
+        var result = primeNumbers.GetNextPrimeNumber(1);
+        result.Should().Be(0);
     }
 }

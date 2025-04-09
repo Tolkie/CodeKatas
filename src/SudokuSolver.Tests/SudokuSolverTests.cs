@@ -1,28 +1,14 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
-namespace SudokuSolver.Tests
+namespace SudokuSolver.Tests;
+
+public class SudokuSolverTests
 {
-    [TestClass]
-    public class SudokuSolverTests
+    private readonly SudokuSolver sudokuSolver = new();
+
+    [Fact]
+    public void TestMethod1()
     {
-        private SudokuSolver sudokuSolver;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            sudokuSolver = new SudokuSolver();
-        }
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            sudokuSolver = null;
-        }
-        
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
+        throw new NotImplementedException();
     }
 }

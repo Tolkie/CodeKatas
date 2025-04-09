@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BinaryNumbers
+﻿namespace BinaryNumbers
 {
     public class BinaryNumbers
     {

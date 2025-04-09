@@ -1,41 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace PokerHandRanking.Tests
+namespace PokerHandRanking.Tests;
+
+public class PokerHandRankingTests
 {
-    [TestClass]
-    public class PokerHandRankingTests
+    private readonly PokerHandRanking pokerHandRanking = new();
+
+    [Fact]
+    public void PokerHandRanking_returns_royal_flush()
     {
-        private PokerHandRanking pokerHandRanking;
-
-        [TestInitialize]
-        public void TestInitialize()
+        var hand = new List<Card>
         {
-            pokerHandRanking = new PokerHandRanking();
-        }
+            new() { Rank = Rank.Ace, Suit = Suit.Club },
+            new() { Rank = Rank.King, Suit = Suit.Club },
+            new() { Rank = Rank.Queen, Suit = Suit.Club },
+            new() { Rank = Rank.Jack, Suit = Suit.Club },
+            new() { Rank = Rank.Ten, Suit = Suit.Club }
+        };
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            pokerHandRanking = null;
-        }
-        
-        [TestMethod]
-        public void PokerHandRanking_returns_royal_flush()
-        {
-            var hand = new List<Card>()
-            {
-                new Card() { Rank = Rank.Ace, Suit = Suit.Club },
-                new Card() { Rank = Rank.King, Suit = Suit.Club },
-                new Card() { Rank = Rank.Queen, Suit = Suit.Club },
-                new Card() { Rank = Rank.Jack, Suit = Suit.Club },
-                new Card() { Rank = Rank.Ten, Suit = Suit.Club }
-            };
+        var result = pokerHandRanking.RankHand(hand);
 
-            var result = pokerHandRanking.RankHand(hand);
-
-            Assert.AreEqual("Royal Flush", result);
-        }
+        result.Should().Be("Royal Flush");
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PigLatin
+﻿namespace PigLatin
 {
     public class PigLatin
     {

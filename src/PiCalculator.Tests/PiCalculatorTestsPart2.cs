@@ -1,30 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using FluentAssertions;
 
-namespace PiCalculator.Tests
+namespace PiCalculator.Tests;
+
+public class PiCalculatorTestsPart2
 {
-    [TestClass]
-    public class PiCalculatorTestsPart2
+    private readonly PiCalculator piCalculator = new();
+
+    [Fact]
+    public void PiCalculator_GetPiDigit_returns_1_for_input_1()
     {
-        private PiCalculator piCalculator;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            piCalculator = new PiCalculator();
-        }
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            piCalculator = null;
-        }
-
-        [TestMethod]
-        public void PiCalculator_GetPiDigit_returns_1_for_input_1()
-        {
-            var result = piCalculator.GetPiDigit(1);
-            Assert.AreEqual(1, result);
-        }
+        var result = piCalculator.GetPiDigit(1);
+        result.Should().Be(1);
     }
 }

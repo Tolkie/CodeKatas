@@ -1,83 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using Xunit;
 
-namespace ChangeReturn.Tests
+namespace ChangeReturn.Tests;
+
+public class ChangeReturnTests
 {
-    [TestClass]
-    public class ChangeReturnTests
+    private readonly ChangeReturn changeReturn = new();
+
+    [Fact]
+    public void ChangeReturn_returns_empty_array_when_no_change_should_be_returned()
     {
-        private ChangeReturn changeReturn;
+        var result = changeReturn.GetChange(0, 0);
+        result.Length.Should().Be(0);
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
+    [Fact]
+    public void ChangeReturn_returns_three_dollars_and_a_nickel()
+    {
+        var expected = new List<Change>
         {
-            changeReturn = new ChangeReturn();
-        }
+            new() {Denomination = Denomination.OneDollar, Number = 3},
+            new() {Denomination = Denomination.Nickel, Number = 1}
+        };
 
-        [TestCleanup]
-        public void TestCleanup()
+        var result = changeReturn.GetChange((decimal) 1.95, (decimal) 5.00);
+
+        result.Should().BeEquivalentTo(expected);
+    }
+
+    [Fact]
+    public void ChangeReturn_returns_one_of_each_denomination()
+    {
+        var expected = new List<Change>
         {
-            changeReturn = null;
-        }  
+            new() {Denomination = Denomination.HundredDollar, Number = 1},
+            new() {Denomination = Denomination.FiftyDollar, Number = 1},
+            new() {Denomination = Denomination.TwentyDollar, Number = 1},
+            new() {Denomination = Denomination.TenDollar, Number = 1},
+            new() {Denomination = Denomination.FiveDollar, Number = 1},
+            new() {Denomination = Denomination.OneDollar, Number = 1},
+            new() {Denomination = Denomination.HalfDollar, Number = 1},
+            new() {Denomination = Denomination.Quarter, Number = 1},
+            new() {Denomination = Denomination.Dime, Number = 1},
+            new() {Denomination = Denomination.Nickel, Number = 1},
+            new() {Denomination = Denomination.Cent, Number = 1}
+        };
 
-        [TestMethod]
-        public void ChangeReturn_returns_empty_array_when_no_change_should_be_returned()
+        var result = changeReturn.GetChange((decimal)13.09, (decimal)200.00);
+
+        result.Should().BeEquivalentTo(expected);
+    }
+
+    [Fact]
+    public void ChangeReturn_returns_one_dime_and_one_nickel()
+    {
+        var expected = new List<Change>
         {
-            var result = changeReturn.GetChange(0, 0);
-            Assert.AreEqual(0, result.Count());
-        }
+            new() {Denomination = Denomination.Dime, Number = 1},
+            new() {Denomination = Denomination.Nickel, Number = 1}
+        };
 
-        [TestMethod]
-        public void ChangeReturn_returns_three_dollars_and_a_nickel()
-        {
-            var expected = new List<Change>
-            {
-                new Change() {Denomination = Denomination.OneDollar, Number = 3},
-                new Change() {Denomination = Denomination.Nickel, Number = 1}
-            };
+        var result = changeReturn.GetChange((decimal)0.85, (decimal)1.00);
 
-            var result = changeReturn.GetChange((decimal) 1.95, (decimal) 5.00);
-
-            CollectionAssert.AreEquivalent(expected, result);
-        }
-
-        [TestMethod]
-        public void ChangeReturn_returns_one_of_each_denomination()
-        {
-            var expected = new List<Change>
-            {
-                new Change() {Denomination = Denomination.HundredDollar, Number = 1},
-                new Change() {Denomination = Denomination.FiftyDollar, Number = 1},
-                new Change() {Denomination = Denomination.TwentyDollar, Number = 1},
-                new Change() {Denomination = Denomination.TenDollar, Number = 1},
-                new Change() {Denomination = Denomination.FiveDollar, Number = 1},
-                new Change() {Denomination = Denomination.OneDollar, Number = 1},
-                new Change() {Denomination = Denomination.HalfDollar, Number = 1},
-                new Change() {Denomination = Denomination.Quarter, Number = 1},
-                new Change() {Denomination = Denomination.Dime, Number = 1},
-                new Change() {Denomination = Denomination.Nickel, Number = 1},
-                new Change() {Denomination = Denomination.Cent, Number = 1}
-            };
-
-            var result = changeReturn.GetChange((decimal)13.09, (decimal)200.00);
-
-            CollectionAssert.AreEquivalent(expected, result);
-        }
-
-        [TestMethod]
-        public void ChangeReturn_returns_one_dime_and_one_nickel()
-        {
-            var expected = new List<Change>
-            {
-                new Change() {Denomination = Denomination.Dime, Number = 1},
-                new Change() {Denomination = Denomination.Nickel, Number = 1}
-            };
-
-            var result = changeReturn.GetChange((decimal)0.85, (decimal)1.00);
-
-            CollectionAssert.AreEquivalent(expected, result);            
-        }
+        result.Should().BeEquivalentTo(expected);          
     }
 }

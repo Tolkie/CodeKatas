@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PokerHandRanking
+﻿namespace PokerHandRanking
 {
     public class PokerHandRanking
     {
