@@ -4,7 +4,17 @@
     {
         public int Count(string s)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                return 0;
+            }
+
+            if (!s.Contains(' '))
+            {
+                return s.Split(",").Length;
+            }
+            
+            return s.Split(" ").Length;
         }
     }
 }

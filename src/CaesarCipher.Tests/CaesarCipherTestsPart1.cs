@@ -20,6 +20,6 @@ public sealed class CaesarCipherTestsPart1
     {
         var result = caesarCipher.Encode("ABC123", 1);
         
-        result.Should().Be("BCD234");
+        result.Should().Be("BCD123");
     }
 }

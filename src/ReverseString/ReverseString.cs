@@ -4,7 +4,9 @@
     {
         public string Reverse(string s)
         {
-            throw new NotImplementedException();
+            var charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
         }
     }
 }

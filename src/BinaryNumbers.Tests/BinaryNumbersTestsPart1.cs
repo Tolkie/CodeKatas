@@ -5,7 +5,7 @@ namespace BinaryNumbers.Tests;
 
 public class BinaryNumbersTestsPart1
 {
-    private BinaryNumbers binaryNumbers = new();
+    private readonly BinaryNumbers binaryNumbers = new();
 
     [Fact]
     public void BinaryNumbers_returns_00000000000000000000000000000000_for_input_0()

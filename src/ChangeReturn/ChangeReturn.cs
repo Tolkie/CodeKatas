@@ -4,7 +4,9 @@
     {
         public Change[] GetChange(decimal cost, decimal paid)
         {
-            throw new NotImplementedException();
+            var change = new List<Change>();
+            
+            
         }
     }
 }

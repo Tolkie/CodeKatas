@@ -10,15 +10,15 @@ public class CaesarCipherTestsPart2
     [Fact]
     public void CaesarCipher_decodes_hello_world_with_4_shift()
     {
-        var result = caesarCipher.Encode("Lipps, Asvph!", 4);
+        var result = caesarCipher.Decode("Lipps, Asvph!", 4);
         
         result.Should().Be("Hello, World!");
     }
 
     [Fact]
-    public void CaesarCipher_dncode_does_not_alter_numbers()
+    public void CaesarCipher_decode_does_not_alter_numbers()
     {
-        var result = caesarCipher.Encode("BCD123", 1);
+        var result = caesarCipher.Decode("BCD123", 1);
         
         result.Should().Be("ABC123");
     }
